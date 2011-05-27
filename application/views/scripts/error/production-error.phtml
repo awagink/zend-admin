@@ -1,0 +1,205 @@
+<?php echo  $this->doctype()?>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="ru">
+<head>
+    <?php echo  $this->headTitle();?>
+    <?php echo  $this->headMeta();?>
+
+
+    <style type="text/css" media="screen">
+        @import url("/skins/main_all/ru/css/main.css");
+        @import url("/skins/main_all/ru/css/cusel.css");
+    </style>
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+
+
+    <!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="/skins/main_all/ru/css/ie6.css" /><![endif]-->
+
+    <script type="text/javascript" src="/js/library/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/verstka/jcarousellite.js"></script>
+    <script type="text/javascript" src="/js/verstka/cusel.js"></script>
+    <script type="text/javascript" src="/js/verstka/main.js"></script>
+
+	<?php echo  $this->headLink();?>
+    <script type="text/javascript" src="/js/library/yoxview/yoxview-init.js"></script>
+
+    <?php echo $this->headScript()?>
+
+
+<!--		<script type="text/javascript">
+		    $(document).ready(function(){
+		        $(".viewAlbumUl li").yoxview();
+		    });
+		</script>-->
+
+
+    </head>
+    <body>
+        <div id="wrapper">
+            <div class="area">
+                <div id="page">
+
+                    <!-- Header -->
+                    <div id="header">
+                        <div class="navigation">
+                            <div id="lang" class="lang">
+                                <ul>
+                                    <?php echo $this->generateLangHtml()?>
+<!--                                    <li id="ru" class="active"><a href="/user/set-language/lang/ru"><img src="/skins/main_all/ru/images/icons/rus.gif" alt="Русский язык" /></a></li>-->
+<!--                                    <li id="ukr"><a href="javascript:;"><img src="/skins/main_all/ru/images/icons/ukr.gif" alt="Украинский язык" /></a></li>-->
+<!--                                    <li id="en"><a href="/user/set-language/lang/en"><img src="/skins/main_all/ru/images/icons/eng.gif" alt="Английский язык" /></a></li>-->
+                                </ul>
+                                <form action="#" method="post">
+                                    <div><input type="hidden" name="language" id="language" value="rus" /></div>
+                                </form>
+                            </div>
+                            <div class="main-menu" id="main-menu">
+                                <ul>
+                                    <li><a href="/<?php echo $this->getLang()?>"><?php echo $this->translate('Main')?></a></li>
+                                    <li><a href="/<?php echo $this->getLang()?>/view-all-groups"><?php echo $this->translate('Groups')?></a></li>
+                                    <li><a href="/<?php echo $this->getLang()?>/news/last-news"><?php echo $this->translate('News')?></a></li>
+                                    <li><a href="/<?php echo $this->getLang()?>/articles/view"><?php echo $this->translate('Articles')?></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="relax">&nbsp;</div>
+                        <a class="logo" href="/<?php echo Sp_Service_Lang::getPageLang()->locale?>">
+                            <img src="/skins/main_all/ru/images/logo.png" alt="Social Sports &ndash; Социальная сеть любителей спорта" />
+                        <span class="firstWord"><?php echo $this->translate('Sport')?></span>
+                        <span class="secondWord"><?php echo $this->translate('Social Network')?></span>
+                        </a>
+                        <div id="searchform" class="searchform">
+                            <form action="#" method="get">
+                                <div>
+                                    <button type="submit">&nbsp;</button>
+                                    <div class="input-bg"><input type="text" id="s" name="s" class="auto-hint" title="<?php echo $this->translate('Search')?>" /></div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="relax">&nbsp;</div>
+                        <!-- Breadcrumbs -->
+                        <div id="breadcrumbs" class="breadcrumbs">
+<!--                            <ul>
+                                <li><a href="#">Главная</a></li>
+                                <li class="current">Форум</li>
+                            </ul>-->
+                        </div>
+                    </div>
+
+                    <!-- Content -->
+                    <div id="content">
+                        <!-- Sidebar -->
+                        <div id="left-column" class="sidebar">
+                            <!-- Last news -->
+                            <div class="widget">
+                                <div class="top">
+<!--                                    <div class="bottom">
+                                        <div id="news" class="news">
+                                        </div>
+                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Main Content -->
+                        <div class="main">
+                            <div class="bottom" style="padding: 20px;">
+                                <?php echo $this->translate($this->errorMsg)?>
+                            </div>
+                        </div>
+                        <!-- Right sidebar -->
+                        <div id="right-column" class="sidebar">
+                            <!-- Profile -->
+<!--                            <div class="widget">-->
+                                <div class="top">
+                                    <div class="bottom">
+<!--                                        <div id="profile" class="profile clearfix">
+                                            <img class="avatar" src="/skins/main_all/ru/images/pictures/profile.jpg" alt="" />
+                                            <div class="user-menu">
+                                                <ul>
+                                                    <li><a href="#">мои сообщения</a> <span class="cnt">(9)</span></li>
+                                                    <li><a href="#">мои групы</a></li>
+                                                    <li><a href="#">мои команды</a></li>
+                                                    <li><a href="#">мои файлы</a></li>
+                                                    <li><a href="#">мои друзья</a></li>
+                                                </ul>
+                                            </div>
+                                            <a href="#" class="exit">выход</a>
+                                        </div>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Updates -->
+                            <div class="widget">
+<!--                                <div class="top">-->
+                                    <div class="bottom">
+                                        <div id="updates" class="updates clearfix">
+<!--                                            <ul>
+                                                <li>
+                                                    <div class="data clearfix">
+                                                        <span>23:45 &nbsp;10.10.2010</span>
+                                                        <a href="#">Admin</a>
+                                                    </div>
+                                                    <h4><a href="#">Свой пишите размере они вы,</a></h4>
+                                                    <p>Нет их обеда потратят процессе, очень истории его ты. Уровней никакого до всю. </p>
+                                                </li>
+                                                <li>
+                                                    <div class="data clearfix">
+                                                        <span>23:45 &nbsp;10.10.2010</span>
+                                                        <a href="#">Admin</a>
+                                                    </div>
+                                                    <h4><a href="#">Свой пишите размере они вы,</a></h4>
+                                                    <p>Нет их обеда потратят процессе, очень истории его ты. Уровней никакого до всю. </p>
+                                                </li>
+                                                <li>
+                                                    <div class="data clearfix">
+                                                        <span>23:45 &nbsp;10.10.2010</span>
+                                                        <a href="#">Admin</a>
+                                                    </div>
+                                                    <h4><a href="#">Свой пишите размере они вы,</a></h4>
+                                                    <p>Нет их обеда потратят процессе, очень истории его ты. Уровней никакого до всю. </p>
+                                                </li>
+                                                <li class="last">
+                                                    <div class="data clearfix">
+                                                        <span>23:45 &nbsp;10.10.2010</span>
+                                                        <a href="#">Admin</a>
+                                                    </div>
+                                                    <h4><a href="#">Свой пишите размере они вы,</a></h4>
+                                                    <p>Нет их обеда потратят процессе, очень истории его ты. Уровней никакого до всю. </p>
+                                                </li>
+                                            </ul>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relax">&nbsp;</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="push">&nbsp;</div>
+        </div>
+
+        <!-- Footer -->
+        <div id="footer">
+            <div class="container">
+                <div class="copyrights">
+                    <p>Copyright &copy; 2010 company. All Rights Reserved.</p>
+                    <p><a href="#">Cоздание сайта</a></p>
+                </div>
+                <div class="nav">
+                    <ul>
+                        <li><a href="#">Реклама</a></li>
+                        <li><a href="#">Контактная информация</a></li>
+                    </ul>
+                </div>
+                <div class="social">
+                    <a href="#"><img src="/skins/main_all/ru/images/icons/social.gif" alt="" /></a>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>    		
