@@ -1,0 +1,23 @@
+<?php 
+$menu = array(
+    'admin' => array(
+        'url' => '/admin',
+        'title' => $this->translate('ADMINISTRATION')
+    ),
+    'admin-tables' => array(
+        'url' => '/admin-tables',
+        'title' => $this->translate('TABLES SETUP')
+    ),
+    'admin-settings' => array(
+        'url' => '/admin-settings',
+        'title' => $this->translate('SETTINGS')
+    ),
+);
+$controller = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
+?>
+<ul id="mainNav">
+    <?php foreach($menu as $k => $item):?>
+    <li><a <?php echo ($k == $controller ? 'class="active"' : '')?> href="<?php echo $item['url']?>"><?php echo $item['title']?></a></li>
+    <?php endforeach?>
+    <li class="logout"><a href="#">LOGOUT</a></li>
+</ul>

@@ -1,0 +1,25 @@
+<?php 
+$menu = array(
+    'index' => array(
+        'url' => '/admin-tables',
+        'title' => $this->translate('All tables')
+    ),
+    'add-table' => array(
+        'url' => '/admin-tables/add-table',
+        'title' => $this->translate('Add table')
+    ),
+    'add-field' => array(
+        'url' => '/admin-tables/add-field',
+        'title' => $this->translate('Add field')
+    ),
+);
+$action = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+?>
+
+<div id="sidebar">
+    <ul class="sideNav">
+        <?php foreach($menu as $k => $item):?>
+        <li><a <?php echo ($k == $action ? 'class="active"' : '')?> href="<?php echo $item['url']?>"><?php echo $item['title']?></a></li>
+        <?php endforeach?>        
+    </ul>
+</div>  
