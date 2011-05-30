@@ -10,7 +10,15 @@ class AdminTablesController
     
     public function addTableAction()
     {
-        $this->view->addTableForm = new Form_AddTable();
+        $addTableForm = new Form_AddTable();
+        if ($this->_request->isPost()) {
+            //add table
+            $idTable = $addTableForm->addTable($this->_request->getPost());
+            if ($idTable) {
+                $this->_redirect('/admin-tables/add-field/id/' . $idTable);
+            }
+        }
+        $this->view->addTableForm = $addTableForm;
     }
     
     public function addFieldAction()

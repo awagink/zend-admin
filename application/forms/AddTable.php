@@ -24,8 +24,12 @@ class Form_AddTable extends Zend_Form
     public function addTable(array $post)
     {
         if ($this->isValid($post)) {
+            $m = new Model_AdminTable;
+            $idTable = $m->addTable($this->getValues());
             
+            return $idTable;
         }
+        return false;
     }
 
 }
