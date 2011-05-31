@@ -5,7 +5,8 @@ class AdminTablesController
 {
     public function indexAction()
     {
-        
+        $m = new Model_AdminTable;
+        $this->view->tables = $m->fetchAll();
     }
     
     public function addTableAction()

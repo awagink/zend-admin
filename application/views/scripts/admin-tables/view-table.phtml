@@ -1,8 +1,8 @@
 <!--<script src="/js/ui/grag.js"></script>-->
-			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type="text/javascript"></script> 
-			<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js" type="text/javascript"></script> 
-			<script src="http://jquery-ui.googlecode.com/svn/tags/latest/external/jquery.bgiframe-2.1.2.js" type="text/javascript"></script> 
-			<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/i18n/jquery-ui-i18n.min.js" type="text/javascript"></script> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type="text/javascript"></script> 
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js" type="text/javascript"></script> 
+<script src="http://jquery-ui.googlecode.com/svn/tags/latest/external/jquery.bgiframe-2.1.2.js" type="text/javascript"></script> 
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/i18n/jquery-ui-i18n.min.js" type="text/javascript"></script> 
 <script>
     $(function(){
         $('#sortable').sortable({
@@ -14,38 +14,40 @@
 <div id="main">
     <h3><?php echo $this->table->name ?></h3>
     <table cellpadding="0" cellspacing="0">
-        <tbody id="sortable">
-        <tr>
-            <td><b><?php echo $this->translate('Field name') ?></b></td>
-            <td><b><?php echo $this->translate('Field type') ?></b></td>
-            <td><b><?php echo $this->translate('Primary') ?></b></td>
-            <td><b><?php echo $this->translate('Required') ?></b></td>
-            <td><b><?php echo $this->translate('Edit field') ?></b></td>
-            <td><b><?php echo $this->translate('Delete field') ?></b></td>
-        </tr>
-        <?php foreach ($this->fields as $f): ?>
+        <thead>
             <tr>
-                <td><?php echo $f->name ?></td>
-                <td class="action">
-                    <a><?php echo Model_AdminField::$fieldTypes[$f->type] ?></a>
-                </td>
-                <td class="action">
-                    <a><?php echo $f->is_primary ? 'Yes' : 'No' ?></a>
-                </td>
-                <td class="action">
-                    <a><?php echo $f->required ? 'Yes' : 'No' ?></a>
-                </td>
-                <td class="action">
-                    <a href="#" class="edit">Edit</a>
-                </td>
-                <td class="action">
-                    <!--                    <a href="#" class="">View</a>-->
-                    <a href="#" class="delete">Delete</a>
-                </td>
-            </tr>          
-            <?php
-        endforeach;
-        ?>   
+                <td><b><?php echo $this->translate('Field name') ?></b></td>
+                <td><b><?php echo $this->translate('Field type') ?></b></td>
+                <td><b><?php echo $this->translate('Primary') ?></b></td>
+                <td><b><?php echo $this->translate('Required') ?></b></td>
+                <td><b><?php echo $this->translate('Edit field') ?></b></td>
+                <td><b><?php echo $this->translate('Delete field') ?></b></td>
+            </tr>
+        </thead>
+        <tbody id="sortable">
+            <?php foreach ($this->fields as $f): ?>
+                <tr>
+                    <td><?php echo $f->name ?></td>
+                    <td class="action">
+                        <a><?php echo Model_AdminField::$fieldTypes[$f->type] ?></a>
+                    </td>
+                    <td class="action">
+                        <a><?php echo $f->is_primary ? 'Yes' : 'No' ?></a>
+                    </td>
+                    <td class="action">
+                        <a><?php echo $f->required ? 'Yes' : 'No' ?></a>
+                    </td>
+                    <td class="action">
+                        <a href="#" class="edit">Edit</a>
+                    </td>
+                    <td class="action">
+                        <!--                    <a href="#" class="">View</a>-->
+                        <a href="#" class="delete">Delete</a>
+                    </td>
+                </tr>          
+                <?php
+            endforeach;
+            ?>   
         </tbody>
     </table>
 </div>
