@@ -38,8 +38,16 @@ class Model_AdminField
         $row->name       = $data['name'];
         $row->created    = date('Y-m-d H:i:s');
         $row->type       = $data['type'];
-        $row->is_primary = $data['id_primary'];
+        $row->is_primary = $data['is_primary'];
         $row->required   = $data['required'];
         return $row->save();
+    }
+    
+    public function getTableFields($idTable)
+    {
+        $select = $this->select();
+        $select->from(array('atf' => $this->_name), $this->_fields);
+        $select->where('atf.id_table = ?', $idTable);
+        return $this->fetchAll($select);
     }
 }

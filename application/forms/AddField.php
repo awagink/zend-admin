@@ -1,8 +1,8 @@
 <?php
 
-class Form_AddField
-    extends Zend_Form
+class Form_AddField extends Zend_Form
 {
+
     public function init()
     {
         $this->setMethod('post');
@@ -11,40 +11,77 @@ class Form_AddField
                     'label' => 'Table',
 //                    'class' => 'text-long',
                     'required' => true,
-                    'multiOptions' => $this->_getTables()
-                ));
-        
+                    'multiOptions' => $this->_getTables(),
+                    'decorators' => array(
+                        'ViewHelper',
+                        'Label',
+                        'Errors',
+                        array('HtmlTag', array('tag' => 'p'))
+                    )
+                        )
+        );
+
         $formElements['name'] = new Zend_Form_Element_Text('name', array(
-            'label' => 'Field name',
-            'required' => true,
-            'filters' => array(
-                array(new Zend_Filter_StringTrim)
-            )
-        ));
-        
+                    'label' => 'Field name',
+                    'class' => 'text-long',
+                    'required' => true,
+                    'filters' => array(
+                        array(new Zend_Filter_StringTrim)
+                    ),
+                    'decorators' => array(
+                        'ViewHelper',
+                        'Label',
+                        'Errors',
+                        array('HtmlTag', array('tag' => 'p'))
+                    )
+                ));
+        $types = Model_AdminField::$fieldTypes;
+        $types[''] = 'Select type';
         $formElements['type'] = new Zend_Form_Element_Select('type', array(
-            'label' => 'Field type',
-            'required' => true,
-            'multiOptions' => array_merge(array('' => 'Select type'), Model_AdminField::$fieldTypes)
-        ));
-        
+                    'label' => 'Field type',
+                    'required' => true,
+                    'multiOptions' => $types,
+                    'value' => '',
+                    'decorators' => array(
+                        'ViewHelper',
+                        'Label',
+                        'Errors',
+                        array('HtmlTag', array('tag' => 'p'))
+                    )
+                ));
         $formElements['is_primary'] = new Zend_Form_Element_Radio('is_primary', array(
-            'label' => 'Primary',
-            'required' => true,
-            'multiOptions' => array(
-                '0' => 'No',
-                '1' => 'Yes'
-            )
-        ));
-        
+                    'label' => 'Primary',
+                    'required' => true,
+                    'value' => '0',
+                    'multiOptions' => array(
+                        '0' => 'No',
+                        '1' => 'Yes'
+                    ),
+                    'separator' => '',
+                    'decorators' => array(
+                        'ViewHelper',
+                        array('Label'),
+                        'Errors',
+                        array('HtmlTag', array('tag' => 'p'))
+                    )
+                ));
+
         $formElements['required'] = new Zend_Form_Element_Radio('required', array(
-            'label' => 'Field required',
-            'multiOptions' => array(
-                '0' => 'No',
-                '1' => 'Yes'
-            )
-        ));
-        
+                    'label' => 'Field required',
+                    'value' => '0',
+                    'multiOptions' => array(
+                        '0' => 'No',
+                        '1' => 'Yes'
+                    ),
+                    'separator' => '',
+                    'decorators' => array(
+                        'ViewHelper',
+                        'Label',
+                        'Errors',
+                        array('HtmlTag', array('tag' => 'p'))
+                    )
+                ));
+
         $formElements['submit'] = new Zend_Form_Element_Submit('submit', array(
                     'label' => 'Add field',
                     'ignore' => true
@@ -52,18 +89,28 @@ class Form_AddField
 
         $this->addElements($formElements);
         $this->addDisplayGroup(array(
-                'id_table', 
-                'name', 
-                'type',
-                'is_primary',
-                'required',
-                'submit',
-                ''
-            ), 'groups', array("legend" => "Add table")
+            'id_table',
+            'name',
+            'type',
+            'is_primary',
+            'required',
+            'submit',
+            ''
+                ), 'groups', array("legend" => "Add field")
         );
-    
     }
-    
+
+    public function addField(array $post)
+    {
+        if ($this->isValid($post)) {
+            $data = $this->getValues();
+            $m = new Model_AdminField;
+            $m->addField($post);
+            return $this->getValue('id_table');
+        }
+        return false;
+    }
+
     protected function _getTables()
     {
         $multiOptions = array(
@@ -76,32 +123,6 @@ class Form_AddField
         }
         return $multiOptions;
     }
-//        'id_field',
-//        'id_table',
-//        'name',
-//        'created',
-//        'type',
-//        'is_primary',
-//        'required'
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

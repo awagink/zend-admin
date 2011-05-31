@@ -190,7 +190,7 @@ h3 {
 #main table tr:hover td { background: #fdfcf6; }
 
 #main table .action {
-	text-align: right;
+/*	text-align: right;*/
 	padding: 0 20px 0 10px;
 }
 
