@@ -20,7 +20,7 @@ class Form_AddField extends Zend_Form
                     )
                         )
         );
-
+        
         $formElements['name'] = new Zend_Form_Element_Text('name', array(
                     'label' => 'Field name',
                     'class' => 'text-long',

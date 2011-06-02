@@ -289,3 +289,7 @@ h3 {
 input[type="submit"] {
     height: 30px;
 }
+
+.content-table {
+    margin: 0 auto;
+}

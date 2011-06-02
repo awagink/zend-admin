@@ -28,9 +28,16 @@ class Model_AdminField
         'created',
         'type',
         'is_primary',
-        'required'
+        'required',
+        'field_order'
     );
     
+    /**
+     * Describe new table field
+     *
+     * @param array $data field data
+     * @return primary key
+     */
     public function addField(array $data)
     {
         $row = $this->createRow();
@@ -40,14 +47,60 @@ class Model_AdminField
         $row->type       = $data['type'];
         $row->is_primary = $data['is_primary'];
         $row->required   = $data['required'];
+        
+        $lastField = @$this->getLastTableField($data['id_table'])->field_order;
+        $row->field_order = $lastField > 0 ? $lastField + 1 : 1;
+        
         return $row->save();
     }
     
+    /**
+     * Find all table fields
+     *
+     * @param int $idTable
+     * @return Zend_Db_Table_Rowset
+     */
     public function getTableFields($idTable)
     {
         $select = $this->select();
         $select->from(array('atf' => $this->_name), $this->_fields);
         $select->where('atf.id_table = ?', $idTable);
+        $select->order('atf.field_order');
         return $this->fetchAll($select);
+    }
+    
+    public function getLastTableField($idTable)
+    {
+        $select = $this->select();
+        $select->from(array('atf' => $this->_name), $this->_fields);
+        $select->where('atf.id_table = ?', $idTable);
+        $select->order('atf.field_order DESC');
+        return $this->fetchRow($select);
+    }
+    
+    /**
+     * Find field by its id
+     *
+     * @param int $idField
+     * @return Zend_Db_Table_Row
+     */
+    public function getFieldById($idField)
+    {
+        $select = $this->select();
+        $select->from(array('atf' => $this->_name), $this->_fields);
+        $select->where('atf.id_field = ?', $idField);
+        return $this->fetchRow($select);
+    }
+    
+    /**
+     * Delete table field
+     *
+     * @param int $idField
+     * @return int
+     */
+    public function deleteFieldById($idField)
+    {
+        $where = $this->getAdapter()->quoteInto('id_field = ?', $idField);
+        return $this->delete($where);
     }
 }

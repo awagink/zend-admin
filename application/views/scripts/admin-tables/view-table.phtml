@@ -11,43 +11,83 @@
     })
 </script>
 
-<div id="main">
-    <h3><?php echo $this->table->name ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <td><b><?php echo $this->translate('Field name') ?></b></td>
-                <td><b><?php echo $this->translate('Field type') ?></b></td>
-                <td><b><?php echo $this->translate('Primary') ?></b></td>
-                <td><b><?php echo $this->translate('Required') ?></b></td>
-                <td><b><?php echo $this->translate('Edit field') ?></b></td>
-                <td><b><?php echo $this->translate('Delete field') ?></b></td>
-            </tr>
-        </thead>
-        <tbody id="sortable">
-            <?php foreach ($this->fields as $f): ?>
-                <tr>
-                    <td><?php echo $f->name ?></td>
-                    <td class="action">
-                        <a><?php echo Model_AdminField::$fieldTypes[$f->type] ?></a>
-                    </td>
-                    <td class="action">
-                        <a><?php echo $f->is_primary ? 'Yes' : 'No' ?></a>
-                    </td>
-                    <td class="action">
-                        <a><?php echo $f->required ? 'Yes' : 'No' ?></a>
-                    </td>
-                    <td class="action">
-                        <a href="#" class="edit">Edit</a>
-                    </td>
-                    <td class="action">
-                        <!--                    <a href="#" class="">View</a>-->
-                        <a href="#" class="delete">Delete</a>
-                    </td>
-                </tr>          
-                <?php
-            endforeach;
-            ?>   
-        </tbody>
-    </table>
-</div>
+<h3 id="tableId" rel="<?php echo $this->table->id_table ?>"><?php echo ucwords($this->table->name) ?></h3>
+<table cellpadding="0" cellspacing="0" class="content-table">
+    <thead>
+        <tr>
+            <td><b><?php echo $this->translate('Field name') ?></b></td>
+            <td><b><?php echo $this->translate('Field type') ?></b></td>
+            <td><b><?php echo $this->translate('Primary') ?></b></td>
+            <td><b><?php echo $this->translate('Required') ?></b></td>
+            <td><b><?php echo $this->translate('Edit field') ?></b></td>
+            <td><b><?php echo $this->translate('Delete field') ?></b></td>
+        </tr>
+    </thead>
+    <tbody id="sortable">
+        <?php foreach ($this->fields as $f): ?>
+            <tr class="id_field" id="id_field<?php echo $f->id_field ?>">
+                <td><?php echo $f->name ?></td>
+                <td class="action">
+                    <a><?php echo Model_AdminField::$fieldTypes[$f->type] ?></a>
+                </td>
+                <td class="action">
+                    <a><?php echo $f->is_primary ? 'Yes' : 'No' ?></a>
+                </td>
+                <td class="action">
+                    <a><?php echo $f->required ? 'Yes' : 'No' ?></a>
+                </td>
+                <td class="action">
+                    <a href="/admin-tables/edit-field/id-field/<?php echo $f->id_field ?>" class="edit">Edit</a>
+                </td>
+                <td class="action">
+                    <!--                    <a href="#" class="">View</a>-->
+                    <a href="#" class="delete deleteField" id="deleteField<?php echo $f->id_field ?>">Delete</a>
+                </td>
+            </tr>          
+            <?php
+        endforeach;
+        ?>   
+    </tbody>
+</table>
+<h3><a href="/admin-tables/add-field/id/<?php echo $this->table->id_table ?>">Add field</a></h3>
+<h3><a href="#" id="saveOrder">Save fields order</a></h3>
+
+
+<script>
+    jQuery(function($){
+        $('.deleteField').live('click', function(event){
+            var e = event ? event : window.event;
+            e.preventDefault();
+            if (window.confirm('Are you sure?')) {
+                var $this = $(this)
+                var idField = parseInt($this.attr('id').substr(11))
+                if (idField > 0) {
+                    $.post('/admin-tables/delete-field', {idField: idField}, function(json){
+                        if (json.status == 1) {
+                            $this.parent().parent().fadeOut(500, function(){
+                                $(this).remove();
+                            })
+                        } else if (json.status == 2) {
+                            alert('Something goes wrong')
+                        }
+                    }, 'json')
+                }
+            }
+        })
+        
+        $('#saveOrder').click(function(event){
+            var e = event ? event : window.event;
+            e.preventDefault();
+            var $elems = $('.id_field');
+            var idTable = $('#tableId').attr('rel');
+            var ids = '';
+            $elems.each(function(){
+                ids += ',' + $(this).attr('id').substr(8);
+            })
+            $.post('/admin-tables/save-field-order', {idTable: idTable, ids: ids}, function(){
+                //@todo render result
+            })
+        })
+    })
+    
+</script>

@@ -1,21 +1,30 @@
-<div id="main">
-    <table cellpadding="0" cellspacing="0">
-<!--        <tbody>
+<?php
+$num = 1;
+?>
+<h3>All tables</h3>
+<table cellpadding="0" cellspacing="0" class="content-table">
+    <thead>
         <tr>
-            <td><b><?php echo $this->translate('Field name') ?></b></td>
-            <td><b><?php echo $this->translate('Field type') ?></b></td>
-            <td><b><?php echo $this->translate('Primary') ?></b></td>
-            <td><b><?php echo $this->translate('Required') ?></b></td>
-            <td><b><?php echo $this->translate('Edit field') ?></b></td>
-            <td><b><?php echo $this->translate('Delete field') ?></b></td>
-        </tr>-->
+            <td></td>
+            <td><b>Name</b></td>
+            <td><b>Added</b></td>
+        </tr>
+    </thead>
+    <tbody>
         <?php foreach ($this->tables as $t): ?>
-            <tr>
-                <td><a href="/admin-tables/view-table/id_table/<?php echo $t->id_table?>"><?php echo $t->name ?></a></td>
+            <tr class="id_field" id="id_field15">
+                <td><?php echo $num++ ?></td>
+                <td>                    
+                    <a href="/admin-tables/view-table/id_table/<?php echo $t->id_table ?>">
+                        <?php echo ucwords($t->name)?>
+                    </a>
+                </td>
+                <td class="action">
+                    <a><?php echo $t->created ?></a>
+                </td>
             </tr>          
             <?php
         endforeach;
-        ?>   
-<!--        </tbody>-->
-    </table>
-</div>
+        ?>
+    </tbody>
+</table>

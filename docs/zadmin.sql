@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Май 30 2011 г., 17:01
+-- Время создания: Июн 02 2011 г., 16:03
 -- Версия сервера: 5.1.54
 -- Версия PHP: 5.3.5-1ubuntu7.2
 
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `admin_table` (
   `name` varchar(255) NOT NULL,
   `created` datetime DEFAULT NULL,
   PRIMARY KEY (`id_table`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -40,5 +40,6 @@ CREATE TABLE IF NOT EXISTS `admin_table_field` (
   `type` tinyint(4) DEFAULT '2',
   `is_primary` tinyint(4) DEFAULT '0',
   `required` tinyint(4) DEFAULT '0',
+  `field_order` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_field`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;

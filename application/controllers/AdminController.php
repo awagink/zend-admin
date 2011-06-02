@@ -1,7 +1,7 @@
 <?php
 
 class AdminController
-    extends Zend_Controller_Action
+    extends Zadmin_Controller_Basic
 {
     public function indexAction()
     {
