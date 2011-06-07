@@ -9,14 +9,21 @@ class Model_AdminField
     const FIELD_TYPE_RADIO    = 4;
     const FIELD_TYPE_FILE     = 5;
     const FIELD_TYPE_PASSWORD = 6;
+    const FIELD_TYPE_DATE     = 7;
+    const FIELD_TYPE_IMAGE    = 8;
+    const FIELD_TYPE_SELECT   = 9;
+
     
     public static $fieldTypes = array(
         self::FIELD_TYPE_TEXT     => 'Text',
+        self::FIELD_TYPE_SELECT   => 'Select',
         self::FIELD_TYPE_CHECKBOX => 'Checkbox',
         self::FIELD_TYPE_HTML     => 'Html',
         self::FIELD_TYPE_RADIO    => 'Radio',
         self::FIELD_TYPE_FILE     => 'File',
         self::FIELD_TYPE_PASSWORD => 'Password',
+        self::FIELD_TYPE_DATE     => 'Date',
+        self::FIELD_TYPE_IMAGE    => 'Image'
     );
     
     protected $_name    = 'admin_table_field';

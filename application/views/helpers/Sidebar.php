@@ -8,7 +8,7 @@ class Zend_View_Helper_Sidebar
         $controller = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
         switch($controller) {
             case 'admin':
-                return $this->view->render('/common/sidebar.phtml');
+                return $this->view->render('/common/_main-admin-sidebar.phtml');
                 break;
             case 'admin-tables':
                 return $this->view->render('/common/_tables-sidebar.phtml');
