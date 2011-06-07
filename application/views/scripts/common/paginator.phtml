@@ -1,0 +1,38 @@
+<?php if ($this->pageCount > 1): ?>
+    <div class="pager">
+        <div class="bg">
+            <?php if ($this->current != 1): ?>
+                <a href="<?php echo $this->url(array('page' => 1))?>">« First</a>
+            <?php else: ?>
+                <span>« Первая</span>
+            <?php endif ?>
+
+            <?php if ($this->current > 1): ?>
+                <a href="<?php echo $this->url(array('page' => $this->previous))?>">&lt; Previous</a>
+            <?php else: ?>
+                <span>&lt; Previous</span>
+            <?php endif ?>
+
+            <?php for ($n = $this->first; $n <= $this->last; $n++): ?>
+                <?php if ($n == $this->current): ?>
+                    <span class="num"><?php echo $n ?></span>
+                <?php else: ?>
+                    <a class="num" href="<?php echo $this->url(array('page' => $n))?>"><?php echo $n ?></a>
+                <?php endif ?>
+            <?php endfor ?>
+
+            <?php if ($this->current < $this->last): ?>
+                <a href="<?php echo $this->url(array('page' => $this->next))?>">Next &gt;</a>
+            <?php else: ?>
+                <span>Next &gt;</span>
+            <?php endif ?>
+
+            <?php if ($this->current != $this->last): ?>
+                <a href="<?php echo $this->url(array('page' => $this->last))?>">Last »</a>
+            <?php else: ?>
+                <span>Last »</span>
+            <?php endif ?>
+
+        </div>
+    </div>
+<?php endif; ?>

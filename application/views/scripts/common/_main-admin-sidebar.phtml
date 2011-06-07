@@ -1,0 +1,16 @@
+<div id="sidebar">
+    <ul class="sideNav">
+        <?php
+        foreach ($this->tables as $t):?>
+        <li><a href="/admin/view-table/id-table/<?php echo $t->id_table?>"><?php echo ucfirst($t->name)?></a></li>
+        <?php
+        endforeach;
+        ?>
+<!--        <li><a href="#" class="active">Print resources</a></li>
+        <li><a href="#">Training &amp; Support</a></li>
+        <li><a href="#">Books</a></li>
+        <li><a href="#">Safari books online</a></li>
+        <li><a href="#">Events</a></li>-->
+    </ul>
+    <!-- // .sideNav -->
+</div>  

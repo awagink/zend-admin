@@ -1,0 +1,26 @@
+<div>
+    <table>
+        <tr>
+            <?php
+            foreach($this->fields as $f):?>
+            <th><?php echo $f?></th>
+            <?php
+            endforeach;
+            ?>
+        </tr>
+    <?php
+    foreach($this->tableItemsPaginator as $i):?>
+    <tr>
+        <?php
+        foreach($i as $k => $v):?>
+        <td><?php echo $v?></td>
+        <?php
+        endforeach;
+        ?>
+    </tr>
+    <?php
+    endforeach;
+    ?>
+    </table>
+    <?php echo $this->paginationControl($this->tableItemsPaginator, 'Sliding', '/common/paginator.phtml')?>
+</div>
