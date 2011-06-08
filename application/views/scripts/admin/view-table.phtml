@@ -23,4 +23,9 @@
     ?>
     </table>
     <?php echo $this->paginationControl($this->tableItemsPaginator, 'Sliding', '/common/paginator.phtml')?>
+    <div>
+        <a href="/admin/add-item/id-table/<?php echo $this->table->id_table?>">
+            Add item in table <?php echo ucfirst($this->table->name)?>
+        </a>
+    </div>
 </div>

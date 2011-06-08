@@ -62,7 +62,7 @@ class Model_AdminTableItems
         return $result['name'];
     }
 
-    protected function _getPaginator($select, $page, $perpage = 1, $pageRange = 10)
+    protected function _getPaginator($select, $page, $perpage = 10, $pageRange = 10)
     {
         $adapter = new Zend_Paginator_Adapter_DbSelect($select);
         $paginator = new Zend_Paginator($adapter);

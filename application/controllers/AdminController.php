@@ -30,5 +30,24 @@ class AdminController
 
         $this->view->tableItemsPaginator = Zadmin_Db::adminTableItems()->getTableItems($t, $tableFieds, $page);
         $this->view->fields = $tableFieds;
+        $this->view->table  = $t;
+    }
+
+    public function addItemAction()
+    {
+        
+    }
+
+    /**
+     * @Ajax
+     */
+    public function removeItemAction()
+    {
+        
+    }
+
+    public function editItemAction()
+    {
+
     }
 }
