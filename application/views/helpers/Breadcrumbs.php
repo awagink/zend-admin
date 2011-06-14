@@ -28,7 +28,7 @@ class Zend_View_Helper_Breadcrumbs
     {
         $active = isset($c['active']) && $c['active'] === true ? 'class="active"' : '';
         if (!isset($c['link'])) {
-            throw new Zadmin_Exception_ShowUser('You have to specify breadcrumb link');
+            throw new Sadmin_Exception_ShowUser('You have to specify breadcrumb link');
         }
         $str = "<a href=\"{$c['link']}\" {$active}>{$c['text']}</a>";
         return $str;

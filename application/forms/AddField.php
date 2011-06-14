@@ -35,6 +35,20 @@ class Form_AddField extends Zend_Form
                         array('HtmlTag', array('tag' => 'p'))
                     )
                 ));
+        $formElements['label'] = new Zend_Form_Element_Text('label', array(
+                    'label' => 'Field label',
+                    'class' => 'text-long',
+                    'required' => false,
+                    'filters' => array(
+                        array(new Zend_Filter_StringTrim)
+                    ),
+                    'decorators' => array(
+                        'ViewHelper',
+                        'Label',
+                        'Errors',
+                        array('HtmlTag', array('tag' => 'p'))
+                    )
+                ));
         $types = Model_AdminField::$fieldTypes;
         $types[''] = 'Select type';
         $formElements['type'] = new Zend_Form_Element_Select('type', array(
@@ -91,6 +105,7 @@ class Form_AddField extends Zend_Form
         $this->addDisplayGroup(array(
             'id_table',
             'name',
+            'label',
             'type',
             'is_primary',
             'required',

@@ -1,13 +1,18 @@
 <?php
 
 class AdminTablesController
-    extends Zadmin_Controller_Basic
+    extends Sadmin_Controller_Basic
 {
     protected $_rootCrumb = array(
             'link' => '/admin-tables',
             'text' => 'Tables Setup'
     );
     protected $_crumbs = array();
+    
+    public function init()
+    {
+        $this->_addCkeditor();
+    }
     
     public function indexAction()
     {
@@ -63,7 +68,7 @@ class AdminTablesController
         $adminTableModel = new Model_AdminTable;
         $table = $adminTableModel->find($idTable)->current();
         if (!is_object($table)) {
-            throw new Zadmin_Exception_ShowUser('Table not found');
+            throw new Sadmin_Exception_ShowUser('Table not found');
         }
         $adminFieldsModel = new Model_AdminField;
         $this->view->table  = $table;
@@ -84,7 +89,7 @@ class AdminTablesController
         $field = $m->getFieldById($idField);
         
         if (!is_object($field)) {
-            throw new Zadmin_Exception_ShowUser('Field not found');
+            throw new Sadmin_Exception_ShowUser('Field not found');
         }
         
         if ($this->_request->isPost()) {

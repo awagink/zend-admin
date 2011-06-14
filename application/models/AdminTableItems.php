@@ -57,7 +57,7 @@ class Model_AdminTableItems
         $select->where('atf.is_primary = 1');
         $result = $adapter->fetchRow($select);
         if (!is_array($result)) {
-            throw new Zadmin_Exception_Internal('Primary key not found');
+            throw new Sadmin_Exception_Internal('Primary key not found');
         }
         return $result['name'];
     }

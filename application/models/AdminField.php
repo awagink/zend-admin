@@ -32,6 +32,7 @@ class Model_AdminField
         'id_field',
         'id_table',
         'name',
+        'label',
         'created',
         'type',
         'is_primary',
@@ -54,6 +55,7 @@ class Model_AdminField
         $row->type       = $data['type'];
         $row->is_primary = $data['is_primary'];
         $row->required   = $data['required'];
+        $row->label      = $data['label'];
         
         $lastField = @$this->getLastTableField($data['id_table'])->field_order;
         $row->field_order = $lastField > 0 ? $lastField + 1 : 1;

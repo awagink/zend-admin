@@ -2,7 +2,7 @@
 
 
 
-class Forms_Fields_Field
+class Form_Fields_Field
 {
     protected $_properties = array();
     
@@ -16,6 +16,6 @@ class Forms_Fields_Field
         if (array_key_exists($name, $this->_properties)) {
             return $this->_properties[$name];
         }
-        throw new Zadmin_Exception_Internal("Unkown property {$name}");
+        throw new Sadmin_Exception_Internal("Unkown property {$name}");
     }
 }

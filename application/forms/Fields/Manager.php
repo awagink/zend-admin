@@ -2,29 +2,21 @@
 
 
 
-class Forms_Fields_Manager
+class Form_Fields_Manager
 {
-    protected $_field = null;
-
-    public function __construct(Forms_Fields_Field $field)
+    protected $_typesPrefix = 'Form_Fields_Types_';
+    
+    public function getFieldType($field)
     {
-        $this->_field = $field;
+        $typeName = $this->_typesPrefix . $this->getTypeAsString($field['type']);
+        return new $typeName($field);
     }
-
-    public function setField(Forms_Fields_Field $field)
+    
+    public function getTypeAsString($typeInt)
     {
-        $this->_field = $field;
-    }
-
-    public function getField()
-    {
-        return $this->_field;
-    }
-
-    public function getZendFormElement()
-    {
-        $fieldTypeClass = "Forms_Fields_Types_{$this->_field->type}";
-        $fieldTypeInst = new $fieldTypeClass($this);
-        
+        if (array_key_exists($typeInt, Model_AdminField::$fieldTypes)) {
+            return Model_AdminField::$fieldTypes[$typeInt];
+        }
+        throw new Sadmin_Exception_Internal("Field with type {$typeInt} does not exist");
     }
 }
