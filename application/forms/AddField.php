@@ -56,11 +56,14 @@ class Form_AddField extends Zend_Form
                     'required' => true,
                     'multiOptions' => $types,
                     'value' => '',
+                    'description' => '&nbsp;',
+                    'id' => 'typeField',
                     'decorators' => array(
                         'ViewHelper',
                         'Label',
+                        array('HtmlTag', array('tag' => 'p')),
+                        array('Description', array('tag' => 'div', 'id' => 'typeFieldArea', 'escape' => false)),    
                         'Errors',
-                        array('HtmlTag', array('tag' => 'p'))
                     )
                 ));
         $formElements['is_primary'] = new Zend_Form_Element_Radio('is_primary', array(

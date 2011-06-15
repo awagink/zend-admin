@@ -1,2 +1,143 @@
 <?php
 echo $this->addFieldForm;
+?>
+
+
+<script>
+    jQuery(function($){
+        window.fn = {}
+        window.fn.preventDefault = function(event) {
+            var e = event ? event : window.event;
+            e.preventDefault();
+        }
+        var fields = {
+            types: {
+                1 : 'text',
+                2 : 'checkbox',
+                3 : 'html',
+                4 : 'radio',
+                5 : 'file',
+                6 : 'password',
+                7 : 'date',
+                8 : 'image',
+                9 : 'select'
+            },
+            handlers: {
+                checkbox: function(){
+                    fields.createValueLabelPair();
+                },
+                radio: function(){
+                    fields.createValueLabelPair();
+                },
+                select: function(){
+                    var $area = $('#typeFieldArea');
+                    var $select = 
+                        '<select id="selectTypeOfSelect">\n\
+                             <option value="1">List</option>\n\
+                             <option value="2">Query</option>\n\
+                         </select>';
+                    $area.html($select);
+                    fields.appendSelectDivList();
+                }
+            },
+            createValueLabelPair: function() {
+                $('#typeFieldArea').html('<div id="valueLabelPairArea"></div>')
+                this.addValueLabelPair();
+            },
+            addValueLabelPair: function() {
+                var $valueLabel = '\
+                    <div class="valueLabelPair">\n\
+                        Value: <input type="text" name="settings_pair_value[]" class="selectValue" />\n\
+                        Label: <input type="text" name="settings_pair_label[]" class="selectLabel" /></label>\n\
+                        <a href="#" class="addValueLabelPair">Add</a>\n\
+                    </div>';
+                $('.addValueLabelPair').replaceWith('<a href="#" style="text-decoration:none;" class="removeValueLabelPair">Remove</a>')
+                $('#typeFieldArea').append($valueLabel)
+            },
+            removeValueLablePair: function($link) {
+                $link.parent().remove();
+            },
+            callHandler: function(index) {
+                 if (typeof this.types[index] != 'undefined' && typeof this.handlers[this.types[index]] == 'function') {
+                     this.handlers[this.types[index]]();
+                 }
+            },
+            appendSelectDivList: function() {
+                var $div = '                         \n\
+                        <div id="typeOfSelectInnerArea">\n\
+                            <div class="selectPair">\n\
+                                Value: <input type="text" name="settings_select_list_value[]" class="selectValue" />\n\
+                                Label: <input type="text" name="settings_select_list_label[]" class="selectLabel" /></label>\n\
+                                <a href="#" class="addListPair">Add</a>\n\
+                            </div>\n\
+                        </div>';
+                this.removeSelectDivList();
+                $('#selectTypeOfSelect').after($div);
+            },
+            appendSelectListPair: function($link) {
+                $link.after('<a href="#" style="text-decoration:none;" class="removeListPair">Remove</a>')
+                var $l = $link.detach();
+                var $listPair = $('                         \n\
+                    <div class="selectPair">\n\
+                        Value: <input type="text" name="settings_select_list_value[]" class="selectValue" />\n\
+                        Label: <input type="text" name="settings_select_list_label[]" class="selectLabel" /></label>\n\
+                    </div>');
+                $listPair.append($l);
+                $('#typeOfSelectInnerArea').append($listPair)
+            },
+            removeSelectDivList: function() {
+                $('#typeOfSelectInnerArea').remove();
+            },
+            appendSelectQueryDiv: function() {
+                var $div = '                         \n\
+                         <div id="typeOfSelectInnerArea">\n\
+                            Query: <input type="text" name="settings_select_query" />\n\
+                         </div>';
+                this.removeSelectDivList();
+                $('#selectTypeOfSelect').after($div)
+            },
+            bindEvents: function() {
+                $('#typeField').change(function(event){
+                    var $this = $(this)
+                    $('#typeFieldArea').html('')
+                    fields.callHandler($this.val());
+                })
+
+                $('#selectTypeOfSelect').live('change', function(){
+                    switch($(this).val()) {
+                        //list
+                        case '1':
+                            fields.appendSelectDivList();
+                            break;
+                        case '2': 
+                            console.log(2)
+                            fields.appendSelectQueryDiv();
+                            break;
+                    }
+                })
+                
+                $('.addListPair').live('click', function(event) {
+                    fn.preventDefault(event);
+                    fields.appendSelectListPair($(this));
+                })
+                
+                $('.removeListPair').live('click', function(e) {
+                    fn.preventDefault(e);
+                    $(this).parent().remove();
+                })
+                
+                $('.removeValueLabelPair').live('click', function(e) {
+                    fn.preventDefault(e);
+                    fields.removeValueLablePair($(this));
+                })
+                
+                $('.addValueLabelPair').live('click', function(e) {
+                    fields.addValueLabelPair();
+                })
+            }
+        }
+        
+        fields.bindEvents();
+    })
+    
+</script>
