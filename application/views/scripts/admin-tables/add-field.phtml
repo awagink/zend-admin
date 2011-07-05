@@ -91,10 +91,40 @@ echo $this->addFieldForm;
             appendSelectQueryDiv: function() {
                 var $div = '                         \n\
                          <div id="typeOfSelectInnerArea">\n\
-                            Query: <input type="text" name="settings_select_query" />\n\
+                            Query: <input type="text" id="settings_select_query" name="settings_select_query" />\n\
                          </div>';
                 this.removeSelectDivList();
                 $('#selectTypeOfSelect').after($div)
+            },
+            collectData: function(){
+                var type = this.types[$('#typeField').val()]
+                var data = {};
+                switch(type) {
+                    case 'select':
+                        var typeOfSelect = $('#selectTypeOfSelect').val()
+//                        console.log(typeOfSelect)
+//                throw 'Hi';
+                        //query
+                        if (typeOfSelect == 2) {
+                            var query = $('#settings_select_query').val()
+                            data.type = $('#typeField').val();
+                            data.subtype = 'query';
+                            data.query   = query;
+                            return this.convertToString(data);
+                        }
+                        break;
+//                    case :
+//                        
+//                        break;
+                }
+            },
+            convertToString: function(obj) {
+                var str = '';
+                for(item in obj) {
+                    var row = item + ' => ' + obj[item] + ';';
+                    str += row
+                }
+                return str;
             },
             bindEvents: function() {
                 $('#typeField').change(function(event){
@@ -133,6 +163,13 @@ echo $this->addFieldForm;
                 
                 $('.addValueLabelPair').live('click', function(e) {
                     fields.addValueLabelPair();
+                })
+                
+                $('#submit').click(function(e){
+                    fn.preventDefault(e);
+                    var data = fields.collectData();
+                    console.log(data)
+                    $('#submit').trigger('submit');
                 })
             }
         }

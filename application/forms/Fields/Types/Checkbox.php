@@ -4,7 +4,7 @@
 
 class Form_Fields_Types_Checkbox
     extends Sadmin_Model_Type_Abstract
-    implements Form_Fields_Types_Interface
+    implements Form_Fields_Types_Type_Interface
 {
     public function getElement()
     {

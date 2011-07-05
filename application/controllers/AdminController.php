@@ -27,7 +27,7 @@ class AdminController
         }
         $page = (int)$this->_getParam('page', 1);
 
-        $tableFieds = Sadmin_Db::adminTableItems()->getTableFields($t);
+        $tableFieds = Sadmin_Db::adminTableItems()->getTableFields($t, true);
 
         $this->view->tableItemsPaginator = Sadmin_Db::adminTableItems()->getTableItems($t, $tableFieds, $page);
         $this->view->fields = $tableFieds;

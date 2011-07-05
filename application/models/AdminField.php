@@ -37,7 +37,9 @@ class Model_AdminField
         'type',
         'is_primary',
         'required',
-        'field_order'
+        'field_order',
+        'show_view',
+        'other'
     );
     
     /**
@@ -56,6 +58,8 @@ class Model_AdminField
         $row->is_primary = $data['is_primary'];
         $row->required   = $data['required'];
         $row->label      = $data['label'];
+        $row->show_view  = $data['show_view'];
+        $row->other      = $data['other'];
         
         $lastField = @$this->getLastTableField($data['id_table'])->field_order;
         $row->field_order = $lastField > 0 ? $lastField + 1 : 1;
@@ -75,6 +79,10 @@ class Model_AdminField
         $select->from(array('atf' => $this->_name), $this->_fields);
         $select->where('atf.id_table = ?', $idTable);
         $select->order('atf.field_order');
+//        if ($onlyForView === true) {
+//            $select->where('atf.show_view = 1');
+//            die('1');
+//        }
         return $this->fetchAll($select);
     }
     

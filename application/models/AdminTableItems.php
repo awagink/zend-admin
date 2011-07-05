@@ -7,7 +7,7 @@
  */
 class Model_AdminTableItems
 {
-    public function getTableFields($table)
+    public function getTableFields($table, $onlyForView = false)
     {
         $adapter = Zend_Db_Table_Abstract::getDefaultAdapter();
         $select = $adapter->select();
@@ -16,6 +16,9 @@ class Model_AdminTableItems
             'name',
             'is_primary'
         ));
+        if ($onlyForView === true) {
+            $select->where('atf.show_view = 1');
+        }
         $select->where('atf.id_table = ?', $table->id_table);
         $select->where('(atf.show_field = 1');
         $select->orWhere('atf.is_primary = 1)');

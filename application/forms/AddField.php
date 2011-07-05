@@ -98,11 +98,21 @@ class Form_AddField extends Zend_Form
                         array('HtmlTag', array('tag' => 'p'))
                     )
                 ));
+        
+        $formElements['show_view'] = new Zend_Form_Element_Checkbox('show_view', array(
+            'label' => 'Show in table view',
+            'value' => 1
+        ));
 
         $formElements['submit'] = new Zend_Form_Element_Submit('submit', array(
                     'label' => 'Add field',
                     'ignore' => true
                 ));
+        $formElements['other'] = new Zend_Form_Element_Hidden('other', array(
+            'decorators' => array(
+                'ViewHelper'
+            )
+        ));
 
         $this->addElements($formElements);
         $this->addDisplayGroup(array(
@@ -112,7 +122,9 @@ class Form_AddField extends Zend_Form
             'type',
             'is_primary',
             'required',
+            'show_view',
             'submit',
+            'other',
             ''
                 ), 'groups', array("legend" => "Add field")
         );
@@ -122,6 +134,9 @@ class Form_AddField extends Zend_Form
     {
         if ($this->isValid($post)) {
             $data = $this->getValues();
+            if (!empty($data['other'])) {
+                
+            }
             $m = new Model_AdminField;
             $m->addField($post);
             return $this->getValue('id_table');
